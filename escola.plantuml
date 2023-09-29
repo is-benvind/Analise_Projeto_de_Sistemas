@@ -1,0 +1,44 @@
+@startuml escola
+
+class escola{
+    +cep: String
+}
+
+class turma{
+    +codigo: String
+    +ano: number
+    +qntdAlunos: double
+    +addAluno()
+}
+
+class pessoa{
+    +nome: String
+    +cpf: String
+    +cep: String
+}
+
+class aluno{
+    +matricula: String
+    +fazerProva()
+}
+
+class professor{
+    +siape: String
+    +formacao: String
+    +salario: double
+    +elaborarProva()
+}
+
+class disciplina{
+    +nome: String
+    +cargaHoraria: double
+}
+
+escola "1" *-- "N" turma : pertence
+turma "N" -- "N" professor : possui
+turma "1" -- "N" aluno : possui
+pessoa <|-- professor
+pessoa <|-- aluno
+professor "N" -- "N" disciplina : ministra
+
+@enduml

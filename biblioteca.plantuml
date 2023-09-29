@@ -1,0 +1,52 @@
+@startuml biblioteca
+
+class empresa
+
+class biblioteca{
+    +acessarDadosFuncionario()
+}
+
+class funcionario{
+    +reservarPub()
+    +emprestarPub()
+    +excluirReserva()
+    +resgatarPub()
+}
+
+class pub{
+    +tipo: categoria
+    +exemplar: exemplar
+    +status: bool
+
+}
+
+class emprestimo{
+    +quantidadePub: int
+    +diaEmprestimo: Date
+    +diaDevolucao: Date
+}
+
+class categoria{
+    +tipo: String
+}
+
+class reserva{
+    +data: Date
+    +alerta()
+}
+
+class exemplar{
+    +nome: String
+    +quantidade: int
+}
+
+empresa "1" o-- "N" biblioteca : pertence
+biblioteca "1" *-- "N" funcionario : pertence
+funcionario "1" --o "N" emprestimo : realiza 
+emprestimo "1" o-- "N" pub : pertence
+funcionario "1" --o "N" reserva : realiza
+reserva "1" o-- "N" pub : pertence
+pub "N" --o "1" categoria : tem
+pub "1" --o "N" exemplar : possui
+
+@enduml

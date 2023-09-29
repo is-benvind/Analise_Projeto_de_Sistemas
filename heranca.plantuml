@@ -1,0 +1,64 @@
+@startuml heranca
+
+title SHOW
+
+class empresa
+
+class biblioteca{
+    +acessarDadosFuncionario()
+}
+
+class funcionario{
+    +reservarPub()
+    +emprestarPub()
+    +excluirReserva()
+    +resgatarPub()
+}
+
+class pub{
+    +titulo: String
+    +editora: String
+    +data: Date
+    +status: bool
+}
+
+class exemplar{
+    +titulo: String
+    +quantidade: int
+}
+
+class livro{
+    +autor: String
+}
+
+class revista
+
+class jornal
+
+class servicos{
+    +quantidade: int
+    +dataPedido: Date
+}
+
+class emprestimo{
+    +diaDevolucao: Date
+}
+
+class reserva{
+    +alerta()
+}
+
+empresa "1" o-- "N" biblioteca : pertence
+biblioteca "1" *-- "N" funcionario : pertence
+funcionario "1" o-- "N" servicos : realiza
+emprestimo "1" o-- "N" pub : possui
+reserva "1" o-- "N" pub : possui
+pub "1" o-- "N" exemplar : possui
+
+pub <|-- livro
+pub <|-- revista
+pub <|-- jornal
+servicos <|-- emprestimo
+servicos <|-- reserva
+
+@enduml
